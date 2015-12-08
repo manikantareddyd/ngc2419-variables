@@ -19,10 +19,10 @@ flat_names.remove('v')
 obj_images = [fits.open(obj_dir+i)[0].header['FILTER'] for i in obj_names]
 flat_images = [fits.open(flat_dir+i)[0].header['FILTER'] for i in flat_names]
 
-pdb.set_trace()
+#pdb.set_trace()
 
 for i in range(len(obj_names)):
-	pdb.set_trace()
+	#pdb.set_trace()
 	if 'I' in obj_images[i]:
 		rename(obj_dir+obj_names[i], obj_dir+'i/'+obj_names[i])
 	elif 'V' in obj_images[i]:
