@@ -2,12 +2,12 @@
 import ccdproc
 from os import listdir
 
-bias_hdu = ccdproc.CCDData.read('data_bias/master_bias.fits', unit='adu')
+bias_hdu = ccdproc.CCDData.read('data_bias/master_bias.fits', unit='adu',)
 flat_hdu_i = ccdproc.CCDData.read('data_flat/i/master_flat.fits', unit='adu')
 flat_hdu_v = ccdproc.CCDData.read('data_flat/v/master_flat.fits', unit='adu')
 
 
-
+print "Now cleaning I"
 #Band I
 subtracted_flat_i = flat_hdu_i
 names_i = listdir('./data_obj/i/')
@@ -20,6 +20,7 @@ for i in range(len(names_i)):
 	subt_obj.write('./data_biascorr/i/'+names_i[i])
 
 
+print "Now cleaning I"
 #Band V
 subtracted_flat_v = flat_hdu_v
 names_v = listdir('./data_obj/v/')
