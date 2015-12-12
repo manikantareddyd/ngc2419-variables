@@ -1,6 +1,7 @@
 from astropy.io import fits
 from photutils import CircularAperture
 from photutils import aperture_photometry
+from math import log10
 
 #I Band
 #These will be the list of 'list' of coordinates and radius of stars of interest
@@ -27,7 +28,7 @@ for i in range(len(coordinates)):
 
 		aperture = CircularAperture([(coordinates[i][0], coordinates[i][1])], r=coordinates[i][2])
 		phot_table = aperture_photometry(fits.open('data_final/i/'+key)[0].data, aperture)
-		thisLine = str(timeDict[key]) + '\t' + str(float(phot_table['aperture_sum'])) + '\n'
+		thisLine = str(timeDict[key]) + '\t' + str(2.5*log10(float(phot_table['aperture_sum'])/float(fits.open('data_obj/i/'+key)[0].header['EXPTIME']))+10) + '\n'
 		outfile.write(thisLine)
 
 	outfile.close()
