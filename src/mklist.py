@@ -17,7 +17,7 @@ for i in imghdr_i:
 	t = 60*(t % m)
 	s = t
 
-	thisLine = str(i[0]) + ',' + str(i[1]['DATE-OBS']) + str(h) + ":" + str(m) + ":" + str(s) + "," + str(i[1]['TM_START']) + ',' + str(i[1]['TM_END']) + '\n'
+	thisLine = str(i[0]) + ',' + str(i[1]['DATE-OBS']) + ' ' + str(h) + ":" + str(m) + ":" + str(s) + "," + str(i[1]['TM_START']) + ',' + str(i[1]['TM_END']) + '\n'
 	outfile_i.write(thisLine)
 
 for i in imghdr_v:
@@ -29,5 +29,5 @@ for i in imghdr_v:
 	t = 60*(t % m)
 	s = t
 
-	thisLine = str(i[0]) + ',' + str(i[1]['DATE-OBS']) + str(h) + ":" + str(m) + ":" + str(s) + "," + str(i[1]['TM_START']) + ',' + str(i[1]['TM_END']) + '\n'
+	thisLine = str(i[0]) + ',' + str(i[1]['DATE-OBS']) + ' ' + str(h) + ":" + str(m) + ":" + str(s) + "," + str(i[1]['TM_START']) + ',' + str(i[1]['TM_END']) + '\n'
 	outfile_v.write(thisLine)
