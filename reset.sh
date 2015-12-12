@@ -1,4 +1,4 @@
-
+rm -rf `find . | grep DS_Store`
 rm data_align/v/*
 rm data_align/i/*
 rm data_bias/*
@@ -9,4 +9,6 @@ rm data_corr/i/*
 rm data_flat/v/*
 rm data_flat/i/*
 rm data_obj/v/*
-rm data_obj/i/*
+rm data_obj/i/
+rm data_corr_trimmed/i/*
+rm data_corr_trimmed/v/**

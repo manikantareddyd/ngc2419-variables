@@ -2,6 +2,13 @@ from astropy.io import fits
 from photutils import CircularAperture
 from photutils import aperture_photometry
 from math import log10
+from astropy import units as u
+from astropy.time import Time
+from astropy.coordinates import SkyCoord, EarthLocation, AltAz
+
+ngc = SkyCoord(["07h38m08.51s +38d52m54.9s"])
+myObs = EarthLocation(lat=17.37*u.deg, lon=-78.48*u.deg)
+utcoffset = 5.5*u.hour
 
 #I Band
 #These will be the list of 'list' of coordinates and radius of stars of interest

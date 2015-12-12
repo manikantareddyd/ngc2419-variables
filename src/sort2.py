@@ -16,8 +16,8 @@ obj_names.remove('v')
 flat_names.remove('i')
 flat_names.remove('v')
 
-obj_images = [fits.open(obj_dir+i)[0].header['FILTER'] for i in obj_names]
-flat_images = [fits.open(flat_dir+i)[0].header['FILTER'] for i in flat_names]
+obj_images = [fits.open(obj_dir+i, ignore_missing_end=True)[0].header['FILTER'] for i in obj_names]
+flat_images = [fits.open(flat_dir+i, ignore_missing_end=True)[0].header['FILTER'] for i in flat_names]
 
 #pdb.set_trace()
 
