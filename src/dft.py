@@ -11,7 +11,7 @@ names_v = os.listdir('./data_corr_trimmed/v')
 print "Directories enlisted..."
 
 print "Entering I alignments..."
-im_ref = fits.open('data_corr_trimmed/i/'+names_i[0])[0].data
+im_ref = fits.open('data_corr_trimmed/v/'+names_v[8])[0].data
 for i in range (len(names_i)):
 	im_test = fits.open('data_corr_trimmed/i/'+names_i[i])[0].data
 	result = ird.similarity(im_ref,im_test,numiter=2)

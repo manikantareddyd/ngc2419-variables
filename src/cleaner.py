@@ -20,7 +20,7 @@ for i in range(len(names_i)):
 	subt_obj.write('./data_biascorr/i/'+names_i[i])
 
 
-print "Now cleaning I"
+print "Now cleaning V"
 #Band V
 subtracted_flat_v = flat_hdu_v
 names_v = listdir('./data_obj/v/')
