@@ -14,3 +14,5 @@ rm data_corr_trimmed/i/*
 rm data_corr_trimmed/v/*
 rm data_final/i/*
 rm data_final/v/*
+rm phots/i/*
+rm phots/v/*

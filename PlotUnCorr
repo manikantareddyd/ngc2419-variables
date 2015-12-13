@@ -1,0 +1,12 @@
+set terminal "png"
+set datafile separator ","
+do for [i=0:4]{
+outfile = sprintf("plots/i/unCorrected/%d_uncorr.png",i)
+set output outfile
+infile = sprintf("phots/i/%d.csv",i)
+set key off
+set ylabel "Uncorrected Magnitude"
+set yrange [*:*] reverse
+set xlabel "Time from start of day (s)"
+plot infile using 2:4
+}

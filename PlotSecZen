@@ -1,0 +1,11 @@
+set terminal "png"
+set datafile separator ","
+do for [i=0:4]{
+outfile = sprintf("plots/i/secZen/%d_secZen.png",i)
+set output outfile
+infile = sprintf("phots/i/%d.csv",i)
+set key off
+set ylabel "Uncorrected Magnitude"
+set xlabel "secZen"
+plot infile using 5:4
+}

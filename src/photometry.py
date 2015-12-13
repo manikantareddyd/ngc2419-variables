@@ -6,8 +6,9 @@ from astropy import units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 import pdb
+import numpy as np
 
-slope_i = 0
+slope_i = -0.4
 slope_v = 0
 
 ngc = SkyCoord(["07h38m08.51s +38d52m54.9s"])
@@ -37,55 +38,55 @@ for i in range(len(coordinates)):
 	for key in sorted(timeDict.keys(), key = str.lower):
 
 		aperture = CircularAperture([(coordinates[i][0], coordinates[i][1])], r=coordinates[i][2])
-		phot_table = aperture_photometry(fits.open('data_final/i/'+key)[0].data, aperture)
-		thisMag = -2.5*log10(float(phot_table['aperture_sum'])/float(fits.open('data_obj/i/'+key)[0].header['EXPTIME']))+10
-
+		data = fits.open('data_final/i/'+key)[0].data
+		#data = data/np.ma.average(data)
+		phot_table = aperture_photometry(data, aperture)
+		thisMag = -2.5*log10(float(phot_table['aperture_sum'])/(float(fits.open('data_obj/i/'+key)[0].header['TM_END'])))
 		time = Time(timeDict[key][1])
 		altaz = ngc.transform_to(AltAz(obstime = time, location = myObs))
 
 		secZenAngle = altaz.secz
-
 		finalMag = thisMag - float(secZenAngle)*slope_i
-		thisLine = str(timeDict[key][1]) + ',' + str(timeDict[key][0]) + ',' + str(finalMag) + '\n'
+		thisLine = str(timeDict[key][1]) + ',' + str(timeDict[key][0]) + ',' + str(finalMag)+','+ str(thisMag) + ',' + str(float(secZenAngle)) + ',' + str(np.ma.average(data)) + '\n'
 		outfile.write(thisLine)
 
 	outfile.close()
 
 
-# V Band
-#These will be the list of 'list' of coordinates and radius of stars of interest
-nameFile = open('dates_v.csv','r').readlines()
-timeDict = {}
+# # V Band
+# #These will be the list of 'list' of coordinates and radius of stars of interest
+# nameFile = open('dates_v.csv','r').readlines()
+# timeDict = {}
 
-for i in nameFile:
-	entries = i.rstrip().split(',')
-	timeDict[entries[0]] = (float(entries[2]), entries[1])
+# for i in nameFile:
+# 	entries = i.rstrip().split(',')
+# 	timeDict[entries[0]] = (float(entries[2]), entries[1])
 
-coordFile = open('coords_V.csv','r').readlines()
-coordinates = []
+# coordFile = open('coords_V.csv','r').readlines()
+# coordinates = []
 
-for i in coordFile:
-	entries = i.rstrip().split(',')
-	thisCoord = [float(entries[0]), float(entries[1]), float(entries[2])]
-	coordinates.append(thisCoord)
+# for i in coordFile:
+# 	entries = i.rstrip().split(',')
+# 	thisCoord = [float(entries[0]), float(entries[1]), float(entries[2])]
+# 	coordinates.append(thisCoord)
 
-for i in range(len(coordinates)):
+# for i in range(len(coordinates)):
 
-	outfile = open('phots/v/'+str(i)+'.csv', 'w+')
+# 	outfile = open('phots/v/'+str(i)+'.csv', 'w+')
 
-	for key in sorted(timeDict.keys(), key = str.lower):
+# 	for key in sorted(timeDict.keys(), key = str.lower):
 
-		aperture = CircularAperture([(coordinates[i][0], coordinates[i][1])], r=coordinates[i][2])
-		phot_table = aperture_photometry(fits.open('data_final/v/'+key)[0].data, aperture)
-		thisMag = -2.5*log10(float(phot_table['aperture_sum'])/float(fits.open('data_obj/v/'+key)[0].header['EXPTIME']))+10
+# 		aperture = CircularAperture([(coordinates[i][0], coordinates[i][1])], r=coordinates[i][2])
+# 		phot_table = aperture_photometry(fits.open('data_final/v/'+key)[0].data, aperture)
+# 		thisMag = -2.5*log10(float(phot_table['aperture_sum'])/float(fits.open('data_obj/v/'+key)[0].header['EXPTIME']))+10
 
-		time = Time(timeDict[key][1])
-		altaz = ngc.transform_to(AltAz(obstime = time, location = myObs))
+# 		time = Time(timeDict[key][1])
+# 		altaz = ngc.transform_to(AltAz(obstime = time, location = myObs))
 
-		secZenAngle = altaz.secz
+# 		secZenAngle = altaz.secz
 
-		finalMag = thisMag - float(secZenAngle)*slope_v
-		thisLine = str(timeDict[key][1]) + ',' + str(timeDict[key][0]) + ',' + str(finalMag) + '\n'
-		outfile.write(thisLine)
+# 		finalMag = thisMag - float(secZenAngle)*slope_v
+# 		thisLine = str(timeDict[key][1]) + ',' + str(timeDict[key][0]) + ',' + str(finalMag) + '\n'
+# 		outfile.write(thisLine)
 
-	outfile.close()
+# 	outfile.close()
