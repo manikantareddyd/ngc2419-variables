@@ -6,4 +6,4 @@ echo "clean" && python src/cleaner.py && \
 echo "trim" && python src/trim.py && \
 echo "align" && python src/dft.py && \
 echo "trim" && python src/align_trim.py && \
-echo "phot" && python src/photmetry.py
+echo "phot" && python src/photometry.py

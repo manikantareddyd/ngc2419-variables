@@ -9,6 +9,8 @@ rm data_corr/i/*
 rm data_flat/v/*
 rm data_flat/i/*
 rm data_obj/v/*
-rm data_obj/i/
+rm data_obj/i/*
 rm data_corr_trimmed/i/*
-rm data_corr_trimmed/v/**
+rm data_corr_trimmed/v/*
+rm data_final/i/*
+rm data_final/v/*
